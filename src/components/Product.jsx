@@ -3,14 +3,15 @@
 import { toast } from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
 import { add, remove } from "../redux/Slices/CartSlices";
+import { useState } from "react";
 
 function Product({ product }) {
   const { cart } = useSelector((state) => state);
   const dispatch = useDispatch();
-  
+  const [quantity, setQuantity] = useState(1);
 
   const addToCart = () => {
-    dispatch(add(product));
+    dispatch(add({ ...product, quantity }));
     toast.success("Item Add to Cart");
   };
 
@@ -19,7 +20,7 @@ function Product({ product }) {
     toast.error("Item Removed From Cart");
   };
   return (
-    <div className="flex flex-col items-center w-70 justify-between hover:scale-110 trasition duration-300 ease-in gap-3 p-4 mt-10 ml-5 rounded-xl ">
+    <div className="flex flex-col shadow-xl hover:shadow-2xl items-center w-70 justify-between hover:scale-110 trasition duration-300 ease-in gap-3 p-4 mt-10 ml-5 rounded-xl ">
       <div>
         <div>
           <p className="text-gray-700 font-semibold text-lg  text-left truncate w-40 mt-1">
@@ -29,12 +30,29 @@ function Product({ product }) {
 
         <div>
           <div className="w-40 text-gray-400 font-normal text-[10px] text-left">
-            {product.description.split(" ").slice(0, 10).join(" ") + "..."}
+            {product.description.split(" ").slice(0, 5).join(" ") + "..."}
           </div>
         </div>
 
         <div className="h-[180px]">
           <img src={product.image} alt="product" className="h-full" />
+        </div>
+
+        <div className="mt-2 mb-2  ">
+          <p className="text-sm">(Inclusive of all Taxes)</p>
+          <div className="text-sm drop-shadow-2xl ">
+            <label className="m-2 bg-gray-400 rounded-l-lg" for="quantity">QTY</label>
+            <input
+              type="number"
+              onChange={(e) => setQuantity(+e.target.value)}
+              value={quantity}
+              min="1"
+              max="100"
+              placeholder="Qty"
+              className=" w-8 rounded-r-lg  outline-offset-2 drop-shadow-2xl outline-none "
+              id="Quantity"
+            />
+          </div>
         </div>
 
         <div className="flex  justify-between gap-10">

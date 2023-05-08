@@ -2,17 +2,24 @@ import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
 import CartItems from "../components/CartItems";
+import { toast } from "react-hot-toast";
 
 function Cart() {
   const { cart } = useSelector((state) => state);
   const [totalAmount, setTotalAmount] = useState(0);
+  const [totalItem, settotalItem] = useState(0)
+
+  const checkOutHandler=()=>{
+      toast.success("proceed to payment")
+  }
 
   useEffect(() => {
-    setTotalAmount(cart.reduce((acc, curr) => acc + curr.price, 0));
+    setTotalAmount(cart.reduce((acc, curr) => acc + (curr.price * curr.quantity), 0));
+    settotalItem(cart.reduce((acc, curr) => acc + curr.quantity, 0))
   }, [cart]);
 
   return (
-    <div>
+    <div className="mt-6 ml-6 relative">
       {cart.length > 0 ? (
         <div className="flex flex-row gap-11 ">
           <div>
@@ -22,19 +29,19 @@ function Cart() {
               );
             })}
           </div>
-          <div className="flex flex-col">
+          <div className="flex flex-col ">
             <div>
               <div className=" font-semibold text-[12px] text-green-700 uppercase text-left">
                 your Cart
               </div>
-              <div>SUMMARY</div>
+              <div className=" font-semibold text-lg text-green-700 uppercase text-left">SUMMARY</div>
               <p>
-                <span>Total items: ${cart.length}</span>
+                <span className="font-semibold">Total items :  {(+totalItem)}</span>
               </p>
             </div>
             <div>
-              <p>Total Amount : {totalAmount}</p>
-              <button>CheckOut Now</button>
+              <p className="font-semibold">Total Amount : ${parseFloat(totalAmount).toFixed(2)}</p>
+              <button className="text-2xl bg-green-600 rounded-lg p-1 absolute bottom-4 m-auto" onClick={checkOutHandler}>CheckOut Now</button>
             </div>
           </div>
         </div>

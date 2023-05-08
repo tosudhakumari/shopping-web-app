@@ -1,10 +1,16 @@
 import { FaCartPlus } from "react-icons/fa";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 const Navbar = () => {
   const { cart } = useSelector((state) => state);
+
+  const [totalItem, settotalItem] = useState(0);
+
+  useEffect(() => {
+    settotalItem(cart.reduce((acc, curr) => acc + curr.quantity, 0));
+  }, [cart]);
   return (
     <div>
       <nav className="flex justify-between items-center h-20 max-600 mx-auto ">
@@ -15,7 +21,7 @@ const Navbar = () => {
               alt="navLogo"
               width={"90px"}
               height={"20px"}
-              className="h-12 rounded-lg drop-shadow-2xl" 
+              className="h-12 rounded-lg drop-shadow-2xl"
             />
           </div>
         </NavLink>
@@ -27,9 +33,13 @@ const Navbar = () => {
 
           <NavLink to="/Cart">
             <div className="relative ">
-              <FaCartPlus className="text-2xl"/>
+              <FaCartPlus className="text-2xl" />
 
-              {cart.length > 0 && <span className="absolute -top-0 -right-1 bg-green-600 text-xs w-3 h-3 flex justify-center items-center animate-bounce rounded-full text-white ">{cart.length}</span>}
+              {cart.length > 0 && (
+                <span className="absolute -top-0 -right-1 bg-green-600 text-xs w-3 h-3 flex justify-center items-center animate-bounce rounded-full text-white ">
+                  {+totalItem}
+                </span>
+              )}
             </div>
           </NavLink>
         </div>
