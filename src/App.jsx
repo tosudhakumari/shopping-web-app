@@ -6,7 +6,7 @@ import Cart from "././pages/Cart";
 const App = () => {
   return (
     <>
-      <div className="bg-slate-900">
+      <div className="bg-slate-900 sticky top-0 z-10">
         <Navbar />
       </div>
 

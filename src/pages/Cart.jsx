@@ -15,11 +15,11 @@ function Cart() {
 
   useEffect(() => {
     setTotalAmount(cart.reduce((acc, curr) => acc + (curr.price * curr.quantity), 0));
-    settotalItem(cart.reduce((acc, curr) => acc + curr.quantity, 0))
+    settotalItem(cart.reduce((acc, curr) => acc + (parseInt(curr.quantity)), 0))
   }, [cart]);
 
   return (
-    <div className="mt-6 ml-6 relative">
+    <div className="mt-6 ml-6 ">
       {cart.length > 0 ? (
         <div className="flex flex-row gap-11 ">
           <div>
@@ -36,12 +36,12 @@ function Cart() {
               </div>
               <div className=" font-semibold text-lg text-green-700 uppercase text-left">SUMMARY</div>
               <p>
-                <span className="font-semibold">Total items :  {(+totalItem)}</span>
+                <span className="font-semibold">Total items :  {(totalItem)}</span>
               </p>
             </div>
             <div>
               <p className="font-semibold">Total Amount : ${parseFloat(totalAmount).toFixed(2)}</p>
-              <button className="text-2xl bg-green-600 rounded-lg p-1 absolute bottom-4 m-auto" onClick={checkOutHandler}>CheckOut Now</button>
+              <button className="text-2xl bg-green-600 rounded-lg p-1 " onClick={checkOutHandler}>CheckOut Now</button>
             </div>
           </div>
         </div>

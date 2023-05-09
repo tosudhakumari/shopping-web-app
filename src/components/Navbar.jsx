@@ -9,7 +9,7 @@ const Navbar = () => {
   const [totalItem, settotalItem] = useState(0);
 
   useEffect(() => {
-    settotalItem(cart.reduce((acc, curr) => acc + curr.quantity, 0));
+    settotalItem(cart.reduce((acc, curr) => acc + (parseInt(curr.quantity)), 0));
   }, [cart]);
   return (
     <div>

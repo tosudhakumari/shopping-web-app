@@ -18,10 +18,14 @@ function CartItems({ item, itemIndex }) {
   };
 
   return (
-    <div className="flex flex-col border-b-2 border-x-black ">
+    <div className="flex flex-col border-b-2 w-80 border-x-black ">
       <div className="flex flex-row gap-10">
         <div className="h-[180px]">
-          <img src={item.image} alt="itemImage" className="h-full" />
+          <img
+            src={item.image}
+            alt="itemImage"
+            className="h-[100px] w-[100px]"
+          />
         </div>
 
         <div>
@@ -35,12 +39,13 @@ function CartItems({ item, itemIndex }) {
             <div>
               <p className="text-green-700">${item.price}</p>
             </div>
-            <div
-              className="text-red-700 border-red-300 rounded-full cursor-pointer text-2xl"
-              onClick={removeFromCart} 
-            >
-              <AiFillDelete/>
-              
+            <div className="relative ">
+              <div
+                className="text-red-700 absolute bottom-0 right-0  border-red-300 rounded-full cursor-pointer text-2xl "
+                onClick={removeFromCart}
+              >
+                <AiFillDelete />
+              </div>
             </div>
           </div>
           <div>
