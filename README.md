@@ -2,4 +2,4 @@
 
 To run clone this repo - run npm install and then npm start
 
-![App screenshot](./app-img.png)
+![App screenshot](./app-img1.png)
