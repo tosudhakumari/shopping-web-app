@@ -38,10 +38,10 @@ function Product({ product }) {
           <img src={product.image} alt="product" className="h-full" />
         </div>
 
-        <div className="mt-2 mb-2  ">
-          <p className="text-sm">(Inclusive of all Taxes)</p>
+        <div className="mt-6 mb-2  ">
+          
           <div className="text-sm drop-shadow-2xl ">
-            <label className="m-2 bg-gray-400 rounded-l-lg" for="quantity">QTY</label>
+            <label className="m-2  bg-gray-400 rounded-l-lg" for="quantity">QTY</label>
             <input
               type="number"
               onChange={(e) => setQuantity(+e.target.value)}
@@ -52,10 +52,11 @@ function Product({ product }) {
               className=" w-8 rounded-r-lg  outline-offset-2 drop-shadow-2xl outline-none "
               id="Quantity"
             />
+            <p className="text-xs">(Inclusive of all Taxes)</p>
           </div>
         </div>
 
-        <div className="flex  justify-between gap-10">
+        <div className="flex  justify-between gap-16">
           <div>
             <p className="text-green-600 font-semibold item-centre ">
               ${product.price}
